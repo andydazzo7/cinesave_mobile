@@ -49,7 +49,7 @@ export class Movie extends React.Component{
     }
 
     render(){
-        console.log(this.state.image )
+        //console.log(this.state.image )
         return(
             <View className="Movie" style={{marginLeft:20, marginBottom:0, backgroundColor:'#C32528', width:140, height:280}}>
              <View  className ='Image'>

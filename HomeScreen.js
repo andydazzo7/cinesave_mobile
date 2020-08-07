@@ -10,6 +10,7 @@ import MovieApi from './MovieApi'
 import { AsyncStorage } from 'react-native';
 import {bg} from './homepage.jpg'
 import {MainMovieScreen} from './MainMovieScreen'
+import {FullMovieList} from './FullMovieScreen'
 const authorizationEndpoint = 'https://dev-ba9hr1-y.auth0.com/authorize';
 const auth0ClientId = 'lKrYS4TJ0E4C7NoHCc2YOWy871k4SqW6';
 
@@ -69,19 +70,13 @@ export const HomeScreen = ({ navigation }, props) => {
       MovieApi.getAllTitles().then(result=>setAllTitles(result));
       AsyncStorage.getItem('user').then(user => setName(user))
   }, [result]);
-  const movie={
-    title:'Birds of Prey',
-    rating: 'PG-13',
-    runtime:'120min', 
-    image: 'https://image.tmdb.org/t/p/w780/h4VB6m0RwcicVEZvzftYZyKXs6K.jpg'
-  }
     return (
         <ScrollView >
        
   
   <Text style={{color:'black', textAlign:'center', fontFamily:'Helvetica', fontSize:18, marginTop:20}}>Top Deals!</Text>
             <Tops movies={movies}></Tops>
-            <MainMovieScreen movie={movie}></MainMovieScreen>
+            <FullMovieList fullList={allmovies} allList={alltitles} />
             </ScrollView>
       
     );
