@@ -6,12 +6,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {HomeScreen, ProfileScreen} from './HomeScreen'
 import {About} from './About'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { registerRootComponent } from 'expo';
+import TopBar from './TopBar'
 
 const Tab = createBottomTabNavigator();
 export default function App() {
   return (
+  
    <NavigationContainer>
-    
+   <TopBar></TopBar>
     <Tab.Navigator>
       
     <Tab.Screen name="Home" component={HomeScreen} />
@@ -30,3 +33,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+registerRootComponent(App)

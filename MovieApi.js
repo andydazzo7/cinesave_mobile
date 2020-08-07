@@ -19,7 +19,7 @@ function time_convert(num)
 }
 function getdiscount(fullness){
     var ret = 58.73 /(1 + (0.087 * (Math.exp(fullness - 31.17))));
-    console.log(ret);
+   // console.log(ret);
     return ret/100;
 }
 let MovieApi={
@@ -27,27 +27,27 @@ let MovieApi={
     getImage(movie){
         return(fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${movie}&language=en-US&page=1&include_adult=false`).then(response => response.json()
         ).then(jsonResponse=> {
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.results[0].poster_path})
         );
     },
     getRelease(movie){
         return(fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${movie}&language=en-US&page=1&include_adult=false`).then(response => response.json()
         ).then(jsonResponse=> {
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.results[0].release_date})
         );
     },
     getPop(movie){
         return(fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${movie}&language=en-US&page=1&include_adult=false`).then(response => response.json()
         ).then(jsonResponse=> {
-            console.log(jsonResponse);
+           // console.log(jsonResponse);
             return jsonResponse.results[0].popularity})
         );
     },
     getTops(){
         return(fetch('https://dry-tor-14403.herokuapp.com/topmovies').then(response=>response.json()).then(jsonResponse=>{
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.map(movies =>({
                 image: '',
                 title: movies.title,
@@ -62,20 +62,20 @@ let MovieApi={
     getId(movie){
         return(fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${movie}&language=en-US&page=1&include_adult=false`).then(response => response.json()
         ).then(jsonResponse=> {
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.results[0].id})
         );
     },
     getOverview(movie){
         return(fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${movie}&language=en-US&page=1&include_adult=false`).then(response => response.json()
         ).then(jsonResponse=> {
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.results[0].overview})
         );
     },
     getUserInfo(user){
         return fetch(`https://dry-tor-14403.herokuapp.com/users/${user}`).then(response=>response.json()).then(jsonResponse=>{
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return {
                 moviesSeen: jsonResponse[0].moviesSeen,
                 moneySaved: jsonResponse[0].moneySaved
@@ -84,7 +84,7 @@ let MovieApi={
     },
     getUserMovies(user){
         return fetch(`https://dry-tor-14403.herokuapp.com/movies/${user}`).then(response=>response.json()).then(jsonResponse=>{
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.map(movies=>{
                 return {
                     title:movies.movie,
@@ -107,7 +107,7 @@ let MovieApi={
     },
     getAllMovies(){
         return(fetch('https://dry-tor-14403.herokuapp.com/allmovies').then(response=>response.json()).then(jsonResponse=>{
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.map(movies =>({
                 image: '',
                 title: movies.title,
@@ -121,7 +121,7 @@ let MovieApi={
     },
     getAllTitles(){
         return fetch(`https://dry-tor-14403.herokuapp.com/allmovieTitle`).then(response=>response.json()).then(jsonResponse=>{
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.map(movies=>movies.title);
         })
     }, 
@@ -131,7 +131,7 @@ let MovieApi={
     getGenreRatingRuntime(id){
         return(fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apikey}&language=en-US`).then(response => response.json()
         ).then(jsonResponse=> {
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return{
                 genre: jsonResponse.genres[0].name,
                 runtime: jsonResponse.runtime
@@ -141,13 +141,13 @@ let MovieApi={
     getBackDrop(movie){
         return(fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${movie}&language=en-US&page=1&include_adult=false`).then(response => response.json()
         ).then(jsonResponse=> {
-            console.log(jsonResponse);
+           // console.log(jsonResponse);
             return jsonResponse.results[0].backdrop_path})
         );
     },
     getSearch(movie){
         return(fetch(`https://dry-tor-14403.herokuapp.com/search/${movie}`).then(response=>response.json()).then(jsonResponse=>{
-            console.log(jsonResponse);
+            //console.log(jsonResponse);
             return jsonResponse.map(movies =>({
                 image: '',
                 title: movies.title,
