@@ -1,7 +1,10 @@
 import React from 'react'
 import MovieApi from './MovieApi'
-import {View, Text, Image, StyleSheet, Button} from 'react-native'
+import {View, Text, Image, StyleSheet} from 'react-native'
 import { white } from 'color-name'
+import { Avatar, Card, Title, Paragraph, Button} from 'react-native-paper';
+import {MovieModal} from './Modal'
+const LeftContent = props => <Avatar.Icon {...props} style={{backgroundColor:'#c32528'}} icon="movie" />
 export class Movie extends React.Component{
     constructor(props){
         super(props)
@@ -50,16 +53,38 @@ export class Movie extends React.Component{
 
     render(){
         //console.log(this.state.image )
+        //<Card elevation={4} style={{width:300, alignSelf:'center', marginBottom:30}} >
+    // <Card.Title title={props.title} subtitle={runGen.genre + " | " + runGen.runtime + 'min'}  left={LeftContent}/>
+    // <Card.Content>
+    //   <Paragraph>{over}</Paragraph>
+    // </Card.Content>
+    // <Card.Cover source={{ uri: image }}  />
+    // <Card.Actions style={{}}>
+    //     <View style={{maxWidth:300, flexDirection:'row', flexWrap:'wrap', justifyContent:'center'}}>
+    // {props.times.map(movie=>{
+    //                  return <Button onPress={()=>console.log('push')}  color='white' style={{width:120, display:'inline',margin:5, backgroundColor:'#C32528'}}>{movie.time}</Button>
+    //              })}
+    //              </View>
+    // </Card.Actions>
+  //</Card>
         return(
-            <View className="Movie" style={{marginLeft:20, marginBottom:0, backgroundColor:'#C32528', width:140, height:280}}>
-             <View  className ='Image'>
-            <Image style={{width:130, height:200, alignSelf:'center'}}source={{uri : this.state.image}}></Image>
-            <Text className='text' style={styles.Text}>{this.props.movie.time}</Text>
-            <Text className='cash' style={styles.Text} ><Text style={{textDecorationLine: 'line-through'}}>$ {this.props.movie.price}</Text> ${this.props.movie.discountedPrice}</Text>
-            <Button color="white" title='Buy Tickets'></Button>
-            </View>
+            <Card elevation={4}style={{width:200, height:300, alignSelf:'center', marginRight:20, marginBottom:50}}>
+                <Card.Title title={this.props.movie.title} left={LeftContent} titleStyle={{fontSize:14,  maxWidth:150}}/>
+                <Card.Content>
+             <Text className='cash' style={styles.Text} ><Text style={{textDecorationLine: 'line-through', color:'#c52328'}}>$ {this.props.movie.price}</Text> ${this.props.movie.discountedPrice}</Text>
+                <MovieModal title={this.props.movie.title} time={this.props.movie.time} price={this.props.movie.discountedPrice} image={this.state.image}></MovieModal>
+                </Card.Content>
+                <Card.Cover source={{ uri: this.state.image }}  />
+            </Card>
+            // <View className="Movie" style={{marginLeft:20, marginBottom:0, backgroundColor:'#C32528', width:140, height:280}}>
+            //  <View  className ='Image'>
+            // <Image style={{width:130, height:200, alignSelf:'center'}}source={{uri : this.state.image}}></Image>
+            // <Text className='text' style={styles.Text}>{this.props.movie.time}</Text>
+            // <Text className='cash' style={styles.Text} ><Text style={{textDecorationLine: 'line-through'}}>$ {this.props.movie.price}</Text> ${this.props.movie.discountedPrice}</Text>
+            // <Button color="white" title='Buy Tickets'></Button>
+            // </View>
           
-             </View>
+            //  </View>
         );
     } 
 }
@@ -72,7 +97,13 @@ const styles = StyleSheet.create({
     },
     Text:{
         fontFamily:'Helvetica',
-        fontSize: 14,
-        textAlign:'center', color: 'white'
+        fontSize: 16,
+        textAlign:'center', color: 'black',marginBottom:10
+    }
+    ,cross:{
+        fontFamily:'Helvetica',
+        fontSize: 16,
+        textAlign:'center', color: 'red'
+
     }
   });

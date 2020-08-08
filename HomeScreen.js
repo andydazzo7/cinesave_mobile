@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, StatusBar, Platform, Alert, Image, ImageBackground, ScrollView} from 'react-native';
 import TopBar from './TopBar'
-
+import {MovieModal} from './Modal'
 import jwtDecode from 'jwt-decode';
 import * as  AuthSession  from 'expo-auth-session';
 import {Movie} from './Movie'
@@ -11,6 +11,7 @@ import { AsyncStorage } from 'react-native';
 import {bg} from './homepage.jpg'
 import {MainMovieScreen} from './MainMovieScreen'
 import {FullMovieList} from './FullMovieScreen'
+import { Modal } from 'react-native-paper';
 const authorizationEndpoint = 'https://dev-ba9hr1-y.auth0.com/authorize';
 const auth0ClientId = 'lKrYS4TJ0E4C7NoHCc2YOWy871k4SqW6';
 
@@ -73,7 +74,6 @@ export const HomeScreen = ({ navigation }, props) => {
     return (
         <ScrollView >
        
-  
   <Text style={{color:'black', textAlign:'center', fontFamily:'Helvetica', fontSize:18, marginTop:20}}>Top Deals!</Text>
             <Tops movies={movies}></Tops>
             <FullMovieList fullList={allmovies} allList={alltitles} />

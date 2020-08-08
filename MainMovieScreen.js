@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Avatar, Button, Card, Title, Paragraph, StyleSheet } from 'react-native-paper';
-import {View} from 'react-native'
+import {View, Text} from 'react-native'
 import MovieApi from './MovieApi'
 
 const LeftContent = props => <Avatar.Icon {...props} style={{backgroundColor:'#c32528'}} icon="movie" />
@@ -21,12 +21,14 @@ export function MainMovieScreen (props){
             MovieApi.getId(props.title).then(result=> MovieApi.getGenreRatingRuntime(result).then(res=>setRun(res)));
         }
     , [])
- 
+   
     return(
   <Card elevation={4} style={{width:300, alignSelf:'center', marginBottom:30}} >
     <Card.Title title={props.title} subtitle={runGen.genre + " | " + runGen.runtime + 'min'}  left={LeftContent}/>
     <Card.Content>
+    <Text style={{display:'inline', textDecoration:'line-through', textAlign:'center', fontSize:16}}>{props.times[0].price}</Text><Text style={{textAlign:'center', fontSize:16, display:'inline'}}>${props.times[0].discountedPrice}</Text>
       <Paragraph>{over}</Paragraph>
+     
     </Card.Content>
     <Card.Cover source={{ uri: image }}  />
     <Card.Actions style={{}}>
