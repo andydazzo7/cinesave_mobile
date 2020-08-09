@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Avatar, Button, Card, Title, Paragraph, StyleSheet } from 'react-native-paper';
 import {View, Text} from 'react-native'
 import MovieApi from './MovieApi'
+import {MovieModal} from './Modal'
 
 const LeftContent = props => <Avatar.Icon {...props} style={{backgroundColor:'#c32528'}} icon="movie" />
 export function MainMovieScreen (props){
@@ -26,7 +27,7 @@ export function MainMovieScreen (props){
   <Card elevation={4} style={{width:300, alignSelf:'center', marginBottom:30}} >
     <Card.Title title={props.title} subtitle={runGen.genre + " | " + runGen.runtime + 'min'}  left={LeftContent}/>
     <Card.Content>
-    <Text style={{display:'inline', textDecoration:'line-through', textAlign:'center', fontSize:16}}>{props.times[0].price}</Text><Text style={{textAlign:'center', fontSize:16, display:'inline'}}>${props.times[0].discountedPrice}</Text>
+    <Text><Text style={{display:'inline', textDecorationLine:'line-through', textAlign:'center', color:'#c32528', fontSize:16}}>${props.times[0].price}</Text><Text style={{textAlign:'center', fontSize:16, display:'inline'}}> ${props.times[0].discountedPrice}</Text></Text>
       <Paragraph>{over}</Paragraph>
      
     </Card.Content>
@@ -34,7 +35,7 @@ export function MainMovieScreen (props){
     <Card.Actions style={{}}>
         <View style={{maxWidth:300, flexDirection:'row', flexWrap:'wrap', justifyContent:'center'}}>
     {props.times.map(movie=>{
-                     return <Button onPress={()=>console.log('push')}  color='white' style={{width:120, display:'inline',margin:5, backgroundColor:'#C32528'}}>{movie.time}</Button>
+                     return (<View><MovieModal title={props.title} time={movie.time} price={movie.discountedPrice} image={image}></MovieModal></View>)
                  })}
                  </View>
     </Card.Actions>

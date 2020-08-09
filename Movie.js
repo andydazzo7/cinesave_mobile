@@ -72,9 +72,12 @@ export class Movie extends React.Component{
                 <Card.Title title={this.props.movie.title} left={LeftContent} titleStyle={{fontSize:14,  maxWidth:150}}/>
                 <Card.Content>
              <Text className='cash' style={styles.Text} ><Text style={{textDecorationLine: 'line-through', color:'#c52328'}}>$ {this.props.movie.price}</Text> ${this.props.movie.discountedPrice}</Text>
-                <MovieModal title={this.props.movie.title} time={this.props.movie.time} price={this.props.movie.discountedPrice} image={this.state.image}></MovieModal>
+              
                 </Card.Content>
-                <Card.Cover source={{ uri: this.state.image }}  />
+                <Card.Cover source={{ uri: this.state.image }} style={{height:150}}  />
+                <Card.Actions style={{marginTop:-22}}>
+                <MovieModal title={this.props.movie.title} time={this.props.movie.time} price={this.props.movie.discountedPrice} image={this.state.image}></MovieModal>
+                </Card.Actions>
             </Card>
             // <View className="Movie" style={{marginLeft:20, marginBottom:0, backgroundColor:'#C32528', width:140, height:280}}>
             //  <View  className ='Image'>
