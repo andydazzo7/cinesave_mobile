@@ -31,8 +31,7 @@ export const MovieModal = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText, {fontSize:26, fontWeight:'bold', marginBottom:10}}>{props.title}</Text>
-            <Image style={{height:100, width:75}} source={{ uri: props.image }}></Image>
+            <Image style={{height:200, width:150}} source={{ uri: props.image }}></Image>
             <Text style={styles.modalText}>Select Your Tickets</Text>
             <InputSpinner
             max={8}
@@ -121,8 +120,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginTop:10,
-    fontSize: 12
+    marginTop:30,
+    fontSize: 12,
   },
   textStyle: {
     color: "white",
@@ -133,6 +132,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
     fontSize:18,
-    fontFamily:'Helvetica'
+    fontFamily:'Helvetica', color:'black'
   }
 });

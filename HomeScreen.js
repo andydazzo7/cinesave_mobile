@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, Platform, Alert, Image, ImageBackground, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, Platform, Alert, Image, ImageBackground, ScrollView, Dimensions} from 'react-native';
 import TopBar from './TopBar'
 import {MovieModal} from './Modal'
 import jwtDecode from 'jwt-decode';
@@ -14,6 +14,9 @@ import {FullMovieList} from './FullMovieScreen'
 import { Modal } from 'react-native-paper';
 const authorizationEndpoint = 'https://dev-ba9hr1-y.auth0.com/authorize';
 const auth0ClientId = 'lKrYS4TJ0E4C7NoHCc2YOWy871k4SqW6';
+const { width, height } = Dimensions.get('window');
+import Swiper from 'react-native-swiper'
+import Collapsible from 'react-native-collapsible';
 
 const useProxy = Platform.select({ web: false, default: true });
 const redirectUri = AuthSession.makeRedirectUri({ useProxy });
@@ -72,19 +75,23 @@ export const HomeScreen = ({ navigation }, props) => {
       AsyncStorage.getItem('user').then(user => setName(user))
   }, [result]);
     return (
-        <ScrollView >
-       
-  <Text style={{color:'black', textAlign:'center', fontFamily:'Helvetica', fontSize:18, marginTop:20}}>Top Deals!</Text>
+        <Swiper horizontal={false}  bounces={true} removeClippedSubviews={true} renderPagination={(index, total) => index===0 ? <View style={styles.pagination}><Text style={styles.paginationText}>All Movies  &#8595;</Text></View>: <Text style={styles.paginationText}></Text>}  >
+       <View style={{height:height}}>
+            <Text style={{color:'black', textAlign:'center', fontFamily:'Helvetica', fontSize:26, marginTop:50}}>Top Deals!</Text>
             <Tops movies={movies}></Tops>
+            <Text style={{color:'black', textAlign:'center'}}>All Movies</Text>
+          </View>
+            <ScrollView style={{height:height-200}}>
             <FullMovieList fullList={allmovies} allList={alltitles} />
             </ScrollView>
+            </Swiper>
       
     );
   };
   export const ProfileScreen = () => {
     const [name, setName] = React.useState(null);
-
-
+    const [coll, setColl] = React.useState(false)
+    
   // Retrieve the redirect URL, add this to the callback URL list
   // of your Auth0 application.
   console.log(`Redirect URL: ${redirectUri}`);
@@ -95,6 +102,7 @@ export const HomeScreen = ({ navigation }, props) => {
 
     return (
         <View>
+         
           <View style={{height:40}}></View>
             {name ? (
          <Text>This is {name}'s profile</Text>
@@ -114,4 +122,29 @@ export const HomeScreen = ({ navigation }, props) => {
       alignItems: 'center',
       justifyContent: 'center',
     },
+    wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB'
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5'
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9'
+  },
+  paginationText:{
+    textAlign:'center',
+    fontFamily:'Helvetica',
+    marginBottom:10, 
+    fontSize:16
+  }
   });

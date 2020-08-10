@@ -60,7 +60,7 @@ export  function TopBar() {
   return(
     <Appbar.Header style={{backgroundColor:'#C32528'}}>
       
-       <Appbar.Content title="Cinesave" />
+       <Appbar.Content title="Cinesave" titleStyle={{fontSize:28, fontWeight:'bold'}}/>
         {//Search 
         }
          {name ? (

@@ -1,10 +1,12 @@
 import React from 'react'
 import MovieApi from './MovieApi'
-import {View, Text, Image, StyleSheet} from 'react-native'
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native'
 import { white } from 'color-name'
 import { Avatar, Card, Title, Paragraph, Button} from 'react-native-paper';
 import {MovieModal} from './Modal'
 const LeftContent = props => <Avatar.Icon {...props} style={{backgroundColor:'#c32528'}} icon="movie" />
+const { width } = Dimensions.get('window');
+const height = width * 0.8
 export class Movie extends React.Component{
     constructor(props){
         super(props)
@@ -68,13 +70,13 @@ export class Movie extends React.Component{
     // </Card.Actions>
   //</Card>
         return(
-            <Card elevation={4}style={{width:200, height:300, alignSelf:'center', marginRight:20, marginBottom:50}}>
-                <Card.Title title={this.props.movie.title} left={LeftContent} titleStyle={{fontSize:14,  maxWidth:150}}/>
+            <Card elevation={10}style={{width:width -100 , height:520, alignSelf:'center', marginRight:20, marginBottom:50, marginTop:10}}>
+                <Card.Title title={this.props.movie.title} left={LeftContent} titleStyle={{fontSize:20,  maxWidth:width-150}} subtitle={this.state.runGen.genre + " | " + this.state.runGen.runtime + 'min'}/>
                 <Card.Content>
              <Text className='cash' style={styles.Text} ><Text style={{textDecorationLine: 'line-through', color:'#c52328'}}>$ {this.props.movie.price}</Text> ${this.props.movie.discountedPrice}</Text>
               
                 </Card.Content>
-                <Card.Cover source={{ uri: this.state.image }} style={{height:150}}  />
+                <Card.Cover source={{ uri: this.state.image }} style={{height:350}}  />
                 <Card.Actions style={{marginTop:-22}}>
                 <MovieModal title={this.props.movie.title} time={this.props.movie.time} price={this.props.movie.discountedPrice} image={this.state.image}></MovieModal>
                 </Card.Actions>
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
     },
     Text:{
         fontFamily:'Helvetica',
-        fontSize: 16,
+        fontSize: 20,
         textAlign:'center', color: 'black',marginBottom:10
     }
     ,cross:{
