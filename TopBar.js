@@ -53,6 +53,7 @@ export  function TopBar() {
 
         const { name } = decoded;
         setName(name);
+        AsyncStorage.clear();
         AsyncStorage.setItem('user',  name)
       }
     }

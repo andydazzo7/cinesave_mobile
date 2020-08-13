@@ -11,12 +11,13 @@ import { AsyncStorage } from 'react-native';
 import {bg} from './homepage.jpg'
 import {MainMovieScreen} from './MainMovieScreen'
 import {FullMovieList} from './FullMovieScreen'
-import { Modal } from 'react-native-paper';
+import { Modal, Card } from 'react-native-paper';
 const authorizationEndpoint = 'https://dev-ba9hr1-y.auth0.com/authorize';
 const auth0ClientId = 'lKrYS4TJ0E4C7NoHCc2YOWy871k4SqW6';
 const { width, height } = Dimensions.get('window');
 import Swiper from 'react-native-swiper'
 import Collapsible from 'react-native-collapsible';
+import ProfileList from './ProfList'
 
 const useProxy = Platform.select({ web: false, default: true });
 const redirectUri = AuthSession.makeRedirectUri({ useProxy });
@@ -90,27 +91,49 @@ export const HomeScreen = ({ navigation }, props) => {
   };
   export const ProfileScreen = () => {
     const [name, setName] = React.useState(null);
-    const [coll, setColl] = React.useState(false)
+    const [coll, setColl] = React.useState(false);
+    const [moviesSeen, setMoviesSeen] =React.useState('')
+    const [moneySaved, setMoney] =React.useState('')
+    const [premium, setPremium] =React.useState('PREMIUM')
+    const [movies, setMovies] = React.useState([])
+    const [showMovies, setShow] = React.useState(false)
+    const [recents, setRecents] = React.useState([])
+    const [change, setChange] = React.useState(0)
+    const [nickname, setNick] = React.useState('');
     
   // Retrieve the redirect URL, add this to the callback URL list
   // of your Auth0 application.
   console.log(`Redirect URL: ${redirectUri}`);
 
   React.useEffect(() => {
-    AsyncStorage.getItem('user').then(user=>setName(user))
+    AsyncStorage.getItem('user').then(user=>{
+      setName(user);
+      const nickname = user.split('@', 1)
+      setNick(nickname)
+      MovieApi.getUserInfo(nickname).then(result=> {
+        console.log(result);
+        setMoviesSeen(result.moviesSeen);
+        setMoney(result.moneySaved)
+    });
+    MovieApi.getUserMovies(nickname).then(result=>{
+        setMovies(result);
+    })
+    })
+   
   }, [name]);
 
     return (
-        <View>
+        <ScrollView>
          
-          <View style={{height:40}}></View>
-            {name ? (
-         <Text>This is {name}'s profile</Text>
-      ) : (
-        <Text>Please Log in</Text>
-      )}
-   
-    </View>
+          <View style={{height:20}}></View>
+         
+      <Image style={{width:200, height:200, alignSelf:'center', borderRadius:100}}source={{uri: 'https://lh3.googleusercontent.com/proxy/mqYwSZoaFmMFea7QqHlwXjkoxjIf41LfRwRtyrq3nLh3-f8oJzW0LwrxI1nO0yUp_SHBtNjL0MQ6RKjHQn5GNRxklH1b6TDtgSkY'}}></Image>
+      <Card style={{width: width-50, alignSelf:'center', marginTop:10}} elevation={20}>
+        <Card.Title  titleStyle={{textAlign:'center', fontSize:26}} title={name} subtitleStyle={{textAlign:'center'}} subtitle={`Movies seen: ${moviesSeen} | Money Saved ${moneySaved}`  }></Card.Title>
+
+      </Card>
+      <ProfileList seen ={moviesSeen} movies={movies}></ProfileList>
+    </ScrollView>
     )
     ;
   };
