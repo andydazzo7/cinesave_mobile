@@ -106,6 +106,8 @@ export class ProfMovie extends React.Component{
                      maximumValue={10}
                      step={0.5}
                      animationType={'spring'}
+                     trackStyle={{height:20, backgroundColor:'#c32528', }}
+                     thumbStyle={{height:30, backgroundColor:'#FFDF00'}}
                      >
                          
                      </Slider>
