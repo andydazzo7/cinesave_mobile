@@ -120,7 +120,10 @@ export const HomeScreen = ({ navigation }, props) => {
     })
     })
    
-  }, [name]);
+  }, [change]);
+  const onChange = () =>[
+    setChange(change+1)
+  ]
 
     return (
         <ScrollView>
@@ -132,7 +135,7 @@ export const HomeScreen = ({ navigation }, props) => {
         <Card.Title  titleStyle={{textAlign:'center', fontSize:26}} title={name} subtitleStyle={{textAlign:'center'}} subtitle={`Movies seen: ${moviesSeen} | Money Saved ${moneySaved}`  }></Card.Title>
 
       </Card>
-      <ProfileList seen ={moviesSeen} movies={movies}></ProfileList>
+      <ProfileList seen ={moviesSeen} movies={movies} onChange={onChange}></ProfileList>
     </ScrollView>
     )
     ;

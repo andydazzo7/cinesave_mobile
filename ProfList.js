@@ -32,7 +32,7 @@ const ProfileList = (props) => {
           theme={{ colors: { primary: '#c32528' }}}
           >
             <View style={{left:-50}}>
-                <ProfMovies movies={props.movies}></ProfMovies>
+                <ProfMovies movies={props.movies} onChange={props.onChange}></ProfMovies>
             </View>
         </List.Accordion>
         <List.Accordion

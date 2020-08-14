@@ -17,7 +17,7 @@ export class ProfMovies extends React.Component {
   };
       _renderItem = ({item, index}) => {
         return (
-          <ProfMovie movie={item}/>
+          <ProfMovie movie={item} onChange={this.props.onChange}/>
         );
     }
 

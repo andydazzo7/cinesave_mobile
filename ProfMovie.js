@@ -100,10 +100,12 @@ export class ProfMovie extends React.Component{
                     <Slider
                      value={this.state.rating}
                      onValueChange={value => {this.setState({rating: value })
-                                                MovieApi.rateMovie(this.state.nickName, this.state.title, value)}}
+                                                MovieApi.rateMovie(this.state.nickName, this.state.title, value)
+                                                this.props.onChange()}}
                      minimumValue={0}
                      maximumValue={10}
                      step={0.5}
+                     animationType={'spring'}
                      >
                          
                      </Slider>
