@@ -1,11 +1,13 @@
 import React from 'react'
 import MovieApi from './MovieApi'
-import {View, Text, Image, StyleSheet, Dimensions} from 'react-native'
+import {View, Text, Image, StyleSheet, Dimensions, AsyncStorage} from 'react-native'
 import { white } from 'color-name'
 import { Avatar, Card, Title, Paragraph, Button} from 'react-native-paper';
 import {MovieModal} from './Modal'
+import Collapsible from 'react-native-collapsible';
 const LeftContent = props => <Avatar.Icon {...props} style={{backgroundColor:'#c32528'}} icon="movie" />
 const { width } = Dimensions.get('window');
+import Slider from "react-native-slider";
 const height = width * 0.8
 export class ProfMovie extends React.Component{
     constructor(props){
@@ -23,13 +25,24 @@ export class ProfMovie extends React.Component{
             id: '',
             runGen:{},
             time: this.props.movie.time, 
-            isMouseIn: false
+            isMouseIn: false, 
+            coll: true,
+            rating: this.props.movie.rating, 
+            nickName:''
         }
         this.getImage = this.getImage.bind(this);
+        this.handleColl = this.handleColl.bind(this)
     }
     componentDidMount(){
         this.getImage();
         this.getOverview();
+        AsyncStorage.getItem('user').then(user=>{
+            const nickname = user.split('@', 1)
+            this.setState({nickName : nickname})
+        })
+    }
+    handleColl(){
+        this.setState({coll: !this.state.coll})
     }
     componentDidUpdate(prevProps, prevState) {
         
@@ -70,16 +83,31 @@ export class ProfMovie extends React.Component{
     // </Card.Actions>
   //</Card>
         return(
-            <Card elevation={10}style={{width:250 , height:320, alignSelf:'center', marginRight:20, marginBottom:50, marginTop:10}}>
+            <Card elevation={10}style={{width:250 , height:400, alignSelf:'center', marginRight:20, marginBottom:50, marginTop:10}}>
                 <Card.Title title={this.props.movie.title} left={LeftContent} titleStyle={{fontSize:20,  maxWidth:width-150}} subtitle={this.state.runGen.genre + " | " + this.state.runGen.runtime + 'min'}/>
                 <Card.Content>
                     
                 </Card.Content>
-                <Card.Cover source={{ uri: this.state.image }} style={{height:180}}  />
+                <Card.Cover source={{ uri: this.state.image }} style={{height:200}}  />
                 <Card.Actions>
                     <View style={{width:230}}>
-                <Text style={{alignSelf:'center'}}>Rating: {this.props.movie.rating} / 10</Text>
-                <Button onPress={() => console.log('modal here') }style={{display:'block', fontSize:12, width:150, alignSelf:'center'}} color='#c32528'>Rate Movie</Button>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-around', width:110, alignSelf:'center'}}>
+                            <Image style={{width:30, height:38, alignSelf:'center'}} source={{uri: 'https://www.clipartqueen.com/image-files/orange-star-clipart.png'}}></Image>
+                <Text style={{alignSelf:'center', color:'black', fontSize:16}}>{this.state.rating} / 10</Text>
+                </View>
+                <Button onPress={this.handleColl}style={{display:'block', fontSize:12, width:150, alignSelf:'center'}} color='#c32528'>Rate Movie</Button>
+                <Collapsible collapsed={this.state.coll}>
+                    <Slider
+                     value={this.state.rating}
+                     onValueChange={value => {this.setState({rating: value })
+                                                MovieApi.rateMovie(this.state.nickName, this.state.title, value)}}
+                     minimumValue={0}
+                     maximumValue={10}
+                     step={0.5}
+                     >
+                         
+                     </Slider>
+                </Collapsible>
                 </View>
                
                 </Card.Actions>
