@@ -130,7 +130,7 @@ export const HomeScreen = ({ navigation }, props) => {
          
           <View style={{height:20}}></View>
          
-      <Image style={{width:200, height:200, alignSelf:'center', borderRadius:100}}source={{uri: 'https://lh3.googleusercontent.com/proxy/mqYwSZoaFmMFea7QqHlwXjkoxjIf41LfRwRtyrq3nLh3-f8oJzW0LwrxI1nO0yUp_SHBtNjL0MQ6RKjHQn5GNRxklH1b6TDtgSkY'}}></Image>
+      <Image style={{width:200, height:200, alignSelf:'center', borderRadius:50}}source={{uri: 'https://www.apc.org/sites/all/themes/apc2016/img/user-profile-default.png?123'}}></Image>
       <Card style={{width: width-50, alignSelf:'center', marginTop:10}} elevation={20}>
         <Card.Title  titleStyle={{textAlign:'center', fontSize:26}} title={name} subtitleStyle={{textAlign:'center'}} subtitle={`Movies seen: ${moviesSeen} | Money Saved ${moneySaved}`  }></Card.Title>
 
