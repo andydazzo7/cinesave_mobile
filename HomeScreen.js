@@ -76,7 +76,7 @@ export const HomeScreen = ({ navigation }, props) => {
       AsyncStorage.getItem('user').then(user => setName(user))
   }, [result]);
     return (
-        <Swiper horizontal={false}  bounces={true} removeClippedSubviews={true} renderPagination={(index, total) => index===0 ? <View style={styles.pagination}><Text style={styles.paginationText}>All Movies  &#8595;</Text></View>: <Text style={styles.paginationText}></Text>}  >
+        <Swiper horizontal={false} loop={false} bounces={true} removeClippedSubviews={true} renderPagination={(index, total) => index===-1 ? <View style={styles.pagination}><Text style={styles.paginationText}>All Movies  &#8595;</Text></View>: <Text style={styles.paginationText}></Text>}  >
        <View style={{height:height}}>
             <Text style={{color:'black', textAlign:'center', fontFamily:'Helvetica', fontSize:26, marginTop:50}}>Top Deals!</Text>
             <Tops movies={movies}></Tops>

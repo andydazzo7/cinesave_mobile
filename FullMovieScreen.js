@@ -18,14 +18,14 @@ export class FullMovieList extends React.Component{
     }
     render(){
         return(
-            <ScrollView >
+            <View >
                 <Text style={{textAlign:'center', fontSize:24, marginTop:0, height:100}}>Shop All Movies At Cranford Theater!</Text>
             <ScrollView>
                {this.props.allList.map(title=>{
                    return <MainMovieScreen title1={title} times={this.getCorrectArray(title)} user={this.props.user}/>;
                })}
             </ScrollView>
-            </ScrollView>
+            </View>
 
         )
     }
