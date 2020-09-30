@@ -46,7 +46,7 @@ export const MovieModal = (props) => {
                 setSelectedValue(num);
             }}
         />
-         <Text style={styles.modalText, {marginTop:10, fontSize:18}}>Price: {`${props.price} X ${selectedValue} = $${props.price * selectedValue}`}</Text>
+         <Text style={styles.modalText, {marginTop:10, fontSize:18}}>Price: {`${props.price} X ${selectedValue} = $${(props.price * selectedValue).toFixed(2)}`}</Text>
          <Button style={styles.checkButton} color="white" onPress={()=>console.log('add to api')} title={'Checkout'}> Checkout</Button>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#c32528" }}
